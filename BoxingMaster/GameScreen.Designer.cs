@@ -84,12 +84,12 @@
             // 
             // outcomeLabel
             // 
-            this.outcomeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(214)))), ((int)(((byte)(107)))));
-            this.outcomeLabel.Font = new System.Drawing.Font("ROG Fonts", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outcomeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.outcomeLabel.Font = new System.Drawing.Font("ROG Fonts", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outcomeLabel.ForeColor = System.Drawing.Color.Black;
-            this.outcomeLabel.Location = new System.Drawing.Point(105, 182);
+            this.outcomeLabel.Location = new System.Drawing.Point(105, 434);
             this.outcomeLabel.Name = "outcomeLabel";
-            this.outcomeLabel.Size = new System.Drawing.Size(750, 135);
+            this.outcomeLabel.Size = new System.Drawing.Size(750, 79);
             this.outcomeLabel.TabIndex = 3;
             this.outcomeLabel.Text = "MISS";
             this.outcomeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;

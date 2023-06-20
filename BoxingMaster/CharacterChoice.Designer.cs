@@ -31,6 +31,7 @@
             this.createButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.headerLabel = new System.Windows.Forms.Label();
+            this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // createButton
@@ -84,12 +85,30 @@
             this.headerLabel.Text = "P0 SELECT";
             this.headerLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // exitButton
+            // 
+            this.exitButton.BackColor = System.Drawing.Color.Transparent;
+            this.exitButton.BackgroundImage = global::BoxingMaster.Properties.Resources.exitButton;
+            this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.exitButton.FlatAppearance.BorderSize = 0;
+            this.exitButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.exitButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.ForeColor = System.Drawing.Color.Transparent;
+            this.exitButton.Location = new System.Drawing.Point(882, 462);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(75, 75);
+            this.exitButton.TabIndex = 11;
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // CharacterChoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BoxingMaster.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.headerLabel);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.createButton);
@@ -105,5 +124,6 @@
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Label headerLabel;
+        private System.Windows.Forms.Button exitButton;
     }
 }

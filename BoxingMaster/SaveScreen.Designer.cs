@@ -56,6 +56,7 @@
             this.h32 = new System.Windows.Forms.Label();
             this.as31 = new System.Windows.Forms.Label();
             this.as32 = new System.Windows.Forms.Label();
+            this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // save1Button
@@ -419,12 +420,30 @@
             this.as32.Text = "AS";
             this.as32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // exitButton
+            // 
+            this.exitButton.BackColor = System.Drawing.Color.Transparent;
+            this.exitButton.BackgroundImage = global::BoxingMaster.Properties.Resources.exitButton;
+            this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.exitButton.FlatAppearance.BorderSize = 0;
+            this.exitButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.exitButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.ForeColor = System.Drawing.Color.Transparent;
+            this.exitButton.Location = new System.Drawing.Point(882, 462);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(75, 75);
+            this.exitButton.TabIndex = 28;
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // SaveScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BoxingMaster.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.rs31);
             this.Controls.Add(this.rs32);
             this.Controls.Add(this.s31);
@@ -490,5 +509,6 @@
         private System.Windows.Forms.Label h32;
         private System.Windows.Forms.Label as31;
         private System.Windows.Forms.Label as32;
+        private System.Windows.Forms.Button exitButton;
     }
 }

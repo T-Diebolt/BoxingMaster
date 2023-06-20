@@ -10,7 +10,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading; 
+using System.Threading;
+using System.IO;
 
 namespace BoxingMaster
 {
@@ -63,6 +64,7 @@ namespace BoxingMaster
             pI[0] = pI[1] = 0;
             outcomeT = 500;
             counterT = 0;
+            defender = attacker = 2;
         }
 
         private void coinEngine_Tick(object sender, EventArgs e)
@@ -95,17 +97,17 @@ namespace BoxingMaster
                 gameEngine.Enabled = true; 
             }
 
-            if(coinY > this.Height)
+            if(coinY > this.Height && gameEngine.Enabled == false)
             {
                 coinV = 17;
                 coinY = this.Height - 1;
                 coinT = -1;
                 coinVt = 0;
                 coin = randGen.Next(coinImages.Length - 2, coinImages.Length);
-                defender = coin - (coinImages.Length - 2);
+                attacker = coin - (coinImages.Length - 2);
 
-                if (defender == 1) { attacker = 0; }
-                else { attacker = 1; }
+                if (attacker == 1) { defender = 0; }
+                else if (attacker == 0) { defender = 1; }
             }
         }
 
@@ -178,10 +180,16 @@ namespace BoxingMaster
                     if (defender == 0 && wHit)
                     {
                         players[1].health -= 2;
+                        var punchSound = new System.Windows.Media.MediaPlayer();
+                        punchSound.Open(new Uri(Application.StartupPath + "/Resources/Punch.wav"));
+                        punchSound.Play();
                     }
                     else if (defender == 1 && upHit)
                     {
                         players[0].health -= 2;
+                        var punchSound = new System.Windows.Media.MediaPlayer();
+                        punchSound.Open(new Uri(Application.StartupPath + "/Resources/Punch.wav"));
+                        punchSound.Play();
                     }
                     if(defender == 0) { counterLabel.BackColor = Color.White; }
                     else { counterLabel.BackColor = Color.FromArgb(227, 141, 136); }
@@ -189,7 +197,7 @@ namespace BoxingMaster
                 }
                 else
                 {
-                    if(outcomeT == 250)
+                    if(outcomeT == 200)
                     {
                         //TO DO play sound
 
@@ -217,7 +225,23 @@ namespace BoxingMaster
                 }
             }
 
-
+            //check for end of game
+            if (players[0].health < 1)
+            {
+                gameEngine.Enabled = false;
+                GameOverScreen.winner = 2;
+                if (players[0].name != players[1].name) { GameOverScreen.winnerName = players[1].name; }
+                else { GameOverScreen.winnerName = "P2"; }
+                Form1.ChangeScreen(this, new GameOverScreen());
+            }
+            else if (players[1].health < 1)
+            {
+                gameEngine.Enabled = false;
+                GameOverScreen.winner = 1;
+                if (players[0].name != players[1].name) { GameOverScreen.winnerName = players[0].name; }
+                else { GameOverScreen.winnerName = "P1"; }
+                Form1.ChangeScreen(this, new GameOverScreen());
+            }
 
             //stop holding
             upHit = wHit = false;
@@ -234,11 +258,17 @@ namespace BoxingMaster
             { 
                 pI[attacker] = 2;
                 players[defender].health -= 80;
+                var kickSound = new System.Windows.Media.MediaPlayer();
+                kickSound.Open(new Uri(Application.StartupPath + "/Resources/Kick.wav"));
+                kickSound.Play();
             }
             else if(outcome == 1) 
             { 
                 pI[attacker] = 1;
                 players[defender].health -= 50;
+                var punchSound = new System.Windows.Media.MediaPlayer();
+                punchSound.Open(new Uri(Application.StartupPath + "/Resources/Punch.wav"));
+                punchSound.Play();
             }
             else
             {
@@ -295,8 +325,8 @@ namespace BoxingMaster
                 }
                 else
                 {
-                    e.Graphics.FillRectangle(redBrush, 300 + defence, 440, 20, 60);
-                    e.Graphics.FillRectangle(whiteBrush, 300 + attack, 440, 20, 60);
+                    e.Graphics.FillRectangle(whiteBrush, 300 + attack - w2 / 2, 440, w2, 60);
+                    e.Graphics.FillRectangle(redBrush, 300 + defence - w1 / 2, 440, w1, 60);
                 }
                 e.Graphics.DrawImage(Resources.Battle_Box, 290, 430, 380, 80);
             }

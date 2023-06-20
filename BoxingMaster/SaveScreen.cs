@@ -309,6 +309,11 @@ namespace BoxingMaster
             else { Save(1); SelectSave(1); }
         }
 
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, new CharacterChoice());
+        }
+
         private void save3Button_Click(object sender, EventArgs e)
         {
             if (select) { SelectSave(2); }
@@ -357,13 +362,6 @@ namespace BoxingMaster
 
             writer.WriteEndElement();
             writer.Close();
-
-            if (Form1.pFocus == 2) { Form1.ChangeScreen(this, new GameScreen()); }
-            else
-            {
-                Form1.pFocus = 2;
-                Form1.ChangeScreen(this, new CharacterChoice());
-            }
 
             saves.Clear();
             LoadDB();

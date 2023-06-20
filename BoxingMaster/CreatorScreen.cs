@@ -172,6 +172,20 @@ namespace BoxingMaster
             RefreshPoints();
         }
 
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            if (yesButton.Visible)
+            {
+                rs1.Visible = rs2.Visible = s1.Visible = s2.Visible = h1.Visible = h2.Visible = as1.Visible = as2.Visible = rsLabel.Visible = sLabel.Visible = hLabel.Visible = asLabel.Visible
+                    = pLabel.Visible = nameLabel.Visible = nameInput.Visible = createButton.Visible = avatarImage.Visible = true;
+                headerLabel.Visible = yesButton.Visible = noButton.Visible = false;
+            }
+            else
+            {
+                Form1.ChangeScreen(this, new CharacterChoice());
+            }
+        }
+
         private void RefreshPoints()
         {
             pLabel.Text = $"POINTS     \n{p}            ";

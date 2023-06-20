@@ -33,5 +33,11 @@ namespace BoxingMaster
         {
             Form1.ChangeScreen(this, new CreatorScreen());
         }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Form1.pFocus = 1;
+            Form1.ChangeScreen(this, new MenuScreen());
+        }
     }
 }
