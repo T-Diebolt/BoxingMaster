@@ -27,6 +27,7 @@ namespace BoxingMaster
 
         public void LoadDB()
         {
+            //loads saved characters from XML file to be manipulated and chosen
             int reactionSpeed, health, strength, attackSpeed;
             string name;
             saves.Clear();
@@ -62,6 +63,7 @@ namespace BoxingMaster
 
         public void InitializeScreen()
         {
+            //displays character attributes in formatted design
             save1Button.Text = $"      {saves[0].name}";
             if (saves[0].reactionSpeed == 0)
             {
@@ -295,6 +297,7 @@ namespace BoxingMaster
             }
         }
 
+        #region save buttons
         private void save1Button_Click(object sender, EventArgs e)
         {
             if (select) { SelectSave(0); }
@@ -309,19 +312,21 @@ namespace BoxingMaster
             else { Save(1); SelectSave(1); }
         }
 
-        private void exitButton_Click(object sender, EventArgs e)
-        {
-            Form1.ChangeScreen(this, new CharacterChoice());
-        }
-
         private void save3Button_Click(object sender, EventArgs e)
         {
             if (select) { SelectSave(2); }
             else { Save(2); SelectSave(2); }
         }
+        #endregion
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, new CharacterChoice());
+        }
 
         public void SelectSave(int s)
         {
+            //sets corresponding player in gamescreen as selected save
             int i = (Form1.pFocus - 1) * 4;
             GameScreen.n[i / 4] = saves[s].name;
             GameScreen.cp[i] = saves[s].reactionSpeed;
@@ -342,6 +347,7 @@ namespace BoxingMaster
 
         public void Save(int i)
         {
+            //saves created character from creator screen in xml, overwriting other character
             saves[i] = new Character(n, rS, s, h, aS);
 
             XmlWriter writer = XmlWriter.Create("Resources/SavedCharacters.xml", null);

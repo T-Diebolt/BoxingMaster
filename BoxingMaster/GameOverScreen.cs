@@ -28,6 +28,7 @@ namespace BoxingMaster
 
         public void InitializeScreen()
         {
+            //displays winner and plays sounds
             bellSound.Open(new Uri(Application.StartupPath + "/Resources/Bell.wav"));
             bellSound.Stop();
             bellSound.Play();
@@ -48,6 +49,7 @@ namespace BoxingMaster
 
         private void GameOverScreen_Paint(object sender, PaintEventArgs e)
         {
+            //draw correct player image
             if(winner == 1)
             {
                 e.Graphics.DrawImage(Properties.Resources.P1rest, 100, 137, 400, 400);
@@ -58,6 +60,7 @@ namespace BoxingMaster
             }
         }
 
+        #region menu + rematch buttons
         private void menuButton2_Click(object sender, EventArgs e)
         {
             Form1.ChangeScreen(this, new MenuScreen());
@@ -77,6 +80,7 @@ namespace BoxingMaster
         {
             Form1.ChangeScreen(this, new GameScreen());
         }
+        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {

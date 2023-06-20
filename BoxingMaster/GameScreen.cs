@@ -17,24 +17,34 @@ namespace BoxingMaster
 {
     public partial class GameScreen : UserControl
     {
+        //button bools
         bool upDown, upHit, wDown, wHit;
-        
+
+        #region player creation variables
         Character[] players = new Character[2];
         Bitmap[] playerImages = { Resources.P1rest, Resources.P1punch, Resources.P1perfect, Resources.P1counter, 
             Resources.P2rest, Resources.P2punch, Resources.P2perfect, Resources.P2counter };
         int[] pI = { 0, 0 };
         public static string[] n = new string[2];
         public static int[] cp = new int[8];
+        #endregion
+
+        #region coin variables
         Bitmap[] coinImages = { Resources.coin01, Resources.coin02, Resources.coin03, Resources.coin04, Resources.coin05, Resources.coin06, Resources.side1, Resources.side2 };
         int coinV, coinVt, coinY, coinT, coin;
         Random randGen = new Random();
-        
+        #endregion
+
+        #region brushes
         Brush redBrush = new SolidBrush(Color.FromArgb(227, 141, 136));
         Brush whiteBrush = new SolidBrush(Color.White);
         Brush yellowBrush = new SolidBrush(Color.FromArgb(238, 214, 107));
+        #endregion
 
+        #region gameplay variables
         int attacker,defender, gameTime, attack, defence, outcome, outcomeT, counterT;
         bool action;
+        #endregion
 
         public GameScreen()
         {
@@ -69,6 +79,7 @@ namespace BoxingMaster
 
         private void coinEngine_Tick(object sender, EventArgs e)
         {
+            //coin movement
             coinVt++;
             if(coinVt == 3)
             {
@@ -91,12 +102,14 @@ namespace BoxingMaster
 
             Refresh();
 
+            //check if coin animation finished
             if(coinY > this.Height && coin > coinImages.Length - 3) 
             { 
                 coinEngine.Enabled = false; 
                 gameEngine.Enabled = true; 
             }
 
+            //check if change from flipping to solid coin
             if(coinY > this.Height && gameEngine.Enabled == false)
             {
                 coinV = 17;
@@ -143,6 +156,7 @@ namespace BoxingMaster
         {
             if (action)
             {
+                //round timer
                 gameTime--;
                 if (gameTime == 0) 
                 { 
@@ -151,9 +165,11 @@ namespace BoxingMaster
                     if(defence == -1) { defence = -50; }
                 }
 
+                //player movement
                 players[attacker].Move(true);
                 players[defender].Move(false);
 
+                //player input results
                 if (upHit) 
                 {
                     if (attacker == 1) { attack = players[1].x + 5; }
@@ -165,6 +181,7 @@ namespace BoxingMaster
                     else { defence = players[0].x + 20; }
                 }
 
+                //show result ahead of end of round timer if both players have played
                 if(defence != -1 && attack != -1)
                 {
                     Outcome();
@@ -172,7 +189,7 @@ namespace BoxingMaster
             }
             else
             {
-                if(counterT != 0)
+                if(counterT != 0)//countering function
                 {
                     counterT--;
                     counterLabel.Visible = true;
@@ -195,12 +212,10 @@ namespace BoxingMaster
                     else { counterLabel.BackColor = Color.FromArgb(227, 141, 136); }
                     if(counterT == 0) { counterLabel.Visible = false; }
                 }
-                else
+                else//display outcome of round
                 {
                     if(outcomeT == 200)
                     {
-                        //TO DO play sound
-
                         outcomeLabel.Visible = true;
                         if(outcome == 2) { outcomeLabel.Text = "PERFECT"; }
                         else if(outcome == 1) { outcomeLabel.Text = "GOOD"; }
@@ -243,7 +258,7 @@ namespace BoxingMaster
                 Form1.ChangeScreen(this, new GameOverScreen());
             }
 
-            //stop holding
+            //prevent button holding
             upHit = wHit = false;
 
             Refresh();
@@ -251,9 +266,11 @@ namespace BoxingMaster
 
         public void Outcome()
         {
+            //finds outcome of hit type from attack function
             outcome = players[attacker].Attack(attack, defence, players[defender].reactionSpeed);
             action = false;
             outcomeT = 200;
+            //chooses what happens based off of outcome
             if (outcome == 2) 
             { 
                 pI[attacker] = 2;
@@ -292,6 +309,7 @@ namespace BoxingMaster
             e.Graphics.FillRectangle(redBrush, 930 - Convert.ToInt32(Math.Round(p2Health, 0)), 30, Convert.ToInt32(Math.Round(p2Health, 0)), 50);
             e.Graphics.DrawImage(Resources.P2health, 490, 20, 450, 70);
 
+            //find width of bars dependant on attacker and defender roles
             int w1 = 0, w2 = 0;
             if (defender == 0) { w1 = 40; w2 = 10; }
             else { w1 = 10; w2 = 40; }

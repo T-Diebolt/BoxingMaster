@@ -28,6 +28,7 @@ namespace BoxingMaster
             RefreshPoints();
         }
 
+        #region Point Buttons
         private void rs1_Click(object sender, EventArgs e)
         {
             if(p != 0 && rS == 0)
@@ -171,6 +172,7 @@ namespace BoxingMaster
             }
             RefreshPoints();
         }
+        #endregion
 
         private void exitButton_Click(object sender, EventArgs e)
         {
@@ -193,6 +195,7 @@ namespace BoxingMaster
 
         private void createButton_Click(object sender, EventArgs e)
         {
+            //asks whether player wants to save new character or not
             if(p == 0 && nameInput.Text != "")
             {
                 rs1.Visible = rs2.Visible = s1.Visible = s2.Visible = h1.Visible = h2.Visible = as1.Visible = as2.Visible = rsLabel.Visible = sLabel.Visible = hLabel.Visible = asLabel.Visible
@@ -207,6 +210,7 @@ namespace BoxingMaster
 
         private void yesButton_Click(object sender, EventArgs e)
         {
+            //yes - save character
             SaveScreen.select = false;
             SaveScreen.n = nameInput.Text;
             SaveScreen.rS = rS;
@@ -219,6 +223,7 @@ namespace BoxingMaster
 
         private void noButton_Click(object sender, EventArgs e)
         {
+            //no - do not save character
             int i = (Form1.pFocus - 1) * 4;
             GameScreen.n[i / 4] = nameInput.Text;
             GameScreen.cp[i] = rS;
