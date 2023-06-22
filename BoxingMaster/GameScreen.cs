@@ -338,13 +338,13 @@ namespace BoxingMaster
                 e.Graphics.FillRectangle(yellowBrush, 300, 440, 360, 60);
                 if (defender == 0)
                 {
-                    e.Graphics.FillRectangle(whiteBrush, 300 + defence - w1 / 2, 440, w1, 60);
-                    e.Graphics.FillRectangle(redBrush, 300 + attack - w2 / 2, 440, w2, 60);
+                    e.Graphics.FillRectangle(whiteBrush, 300 + defence - w2 / 2, 440, w1, 60);
+                    e.Graphics.FillRectangle(redBrush, 300 + attack - w1 / 2, 440, w1, 60);
                 }
                 else
                 {
-                    e.Graphics.FillRectangle(whiteBrush, 300 + attack - w2 / 2, 440, w2, 60);
-                    e.Graphics.FillRectangle(redBrush, 300 + defence - w1 / 2, 440, w1, 60);
+                    e.Graphics.FillRectangle(whiteBrush, 300 + attack - w1 / 2, 440, w1, 60);
+                    e.Graphics.FillRectangle(redBrush, 300 + defence - w2 / 2, 440, w2, 60);
                 }
                 e.Graphics.DrawImage(Resources.Battle_Box, 290, 430, 380, 80);
             }
